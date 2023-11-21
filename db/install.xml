@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/instaplay/db" VERSION="20230817" COMMENT="XMLDB file for URL module"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="instaplay" COMMENT="each record is one instaplay resource">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="videoid" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="posterurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="playbackurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="videotitle" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="catalogid" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="contentid" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="duration" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+		</FIELDS>
+       <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="instaplay_overlay" COMMENT="Instaplay video overlay comments">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="starttime" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Play time on video which comment has to come"/>
+        <FIELD NAME="creationtime" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Time of creation"/>
+        <FIELD NAME="instaplayid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Instaplay id to identify the video"/>
+        <FIELD NAME="endtime" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="position" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Position to display the comment"/>
+        <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Type of comment"/>
+        <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Text to be displayed on video as overlay"/>
+        <FIELD NAME="title" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Title for the overlay comment"/>
+        <FIELD NAME="body" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="instaplayid_key" TYPE="foreign" FIELDS="instaplayid" REFTABLE="instaplay" REFFIELDS="id" COMMENT="Instaplay video id as foreign key."/>
+      </KEYS>
+    </TABLE>
+      <TABLE NAME="instaplay_overlay_options" COMMENT="instaplay overlay type checkbox options">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="instaplayoverlayid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Instaplay id to identify the video"/>
+        <FIELD NAME="optionlvalue" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="instaplayoverlayid_key" TYPE="foreign" FIELDS="instaplayoverlayid" REFTABLE="instaplay_overlay" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+
+    <!-- <TABLE NAME="instaplay_videos" COMMENT="each record is one file resource">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="instaplay_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="videoid" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="playbackurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="videoid_key" TYPE="foreign" FIELDS="videoid" REFTABLE="instaplay" REFFIELDS="videoid"/>
+        <KEY NAME="instaplay_id_key" TYPE="foreign" FIELDS="instaplay_id" REFTABLE="instaplay" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE> -->
+
+  </TABLES>
+</XMLDB>

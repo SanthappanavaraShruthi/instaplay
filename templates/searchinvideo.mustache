@@ -1,0 +1,26 @@
+{{!
+    @template mod_instaplay/searchinvideo
+
+    Renders a form section header
+
+    Example context (json):
+    {
+        "id": "id_general",
+        "header": "General",
+        "collapsed": 0,
+        "collapseable": 1,
+        "helpbutton": "Help"
+    }
+}}
+<p class="h4">Search in video</p>
+<form class="form-inline" method='post' action='view.php'>
+  <div class="form-group">
+    <label for="inputsearchtext" class="col-sm-2 control-label">Search Text</label>
+    <div class="input-group">
+      <input type="hidden" name="sesskey", value=sesskey()>
+       <input type="hidden" name="id", value="#{{pageurl}}">
+      <input type="text"  value = "{{searchvalue}}" class="form-control" id="inputsearchtext" name ="searchtextvalue", placeholder="Enter text ...">
+    </div>
+  </div>
+  <input type="submit" name ="searchtext" class="btn btn-primary">Search</input>
+</form>
